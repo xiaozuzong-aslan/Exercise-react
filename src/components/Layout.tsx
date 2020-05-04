@@ -1,7 +1,7 @@
 import React from 'react'
 import Nav from 'components/Nav'
 import styled from 'styled-components'
-import 'components/Icon'
+
 
 const Wrapper = styled.div`
   display:flex;
@@ -9,6 +9,8 @@ const Wrapper = styled.div`
   height:100vh;
 `; 
 const Main = styled.main`
+  display:flex;
+  flex-direction:column;
   flex-grow:1;
 `;
 

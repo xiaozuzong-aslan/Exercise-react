@@ -1,11 +1,21 @@
 import React from 'react'
 
-import icon from 'icons/label.svg'
-console.log(icon)
-export default function Icon() {
+
+const importAll = (requireContext:__WebpackModuleApi.RequireContext)=>requireContext.keys().forEach(requireContext)
+try{
+    importAll(require.context('icons',true,/\.svg$/))
+}catch(error){
+    console.log(error)
+}
+type Props = {
+    name:string
+}
+const Icon:React.FC<Props> = (props) =>{
     return (
-       <svg>
-           <use></use>
-       </svg>
+        <svg>
+            <use xlinkHref={`#${props.name}`}/>
+        </svg>
     )
 }
+
+export default Icon
