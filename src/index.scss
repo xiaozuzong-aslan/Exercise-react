@@ -18,3 +18,6 @@ ul,ol{
 button,input{
   font-family: $font-hei;
 }
+:focus{
+  outline:none;
+}

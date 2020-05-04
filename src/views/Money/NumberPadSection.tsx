@@ -1,5 +1,37 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components'
+import {calculation} from './calculation'
+
+const NumberPadSection:React.FC = ()=>{
+    const [number,setNumber] = useState<string>('0')
+    const delegate = (e: React.MouseEvent<HTMLDivElement>) => {
+        const input = (e.target as HTMLButtonElement).innerText
+        setNumber(calculation(input,number))
+    }
+    return (
+        <SectionNumberPad>
+            <div className="output">{number}</div>
+            <div className="pad" onClick={(e)=>{
+                delegate(e)
+            }}>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>删除</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>清空</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button className="ok">ok</button>
+                <button className="zero">0</button>
+                <button>.</button>
+            </div>
+        </SectionNumberPad>
+    )
+}
 
 const SectionNumberPad = styled.section`
     display:flex;
@@ -54,26 +86,4 @@ const SectionNumberPad = styled.section`
 
 
 
-export default function NumberPadSection() {
-    return (
-        <SectionNumberPad>
-            <div className="output">0</div>
-            <div className="pad">
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>删除</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>清空</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button className="ok">ok</button>
-                <button className="zero">0</button>
-                <button>.</button>
-            </div>
-        </SectionNumberPad>
-    )
-}
+export  {NumberPadSection}

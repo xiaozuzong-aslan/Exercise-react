@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const SectionTag = styled.section`
@@ -18,7 +18,10 @@ ul{
         margin-right:18px;
         border-radius:16px;
         margin-top:4px;
-
+        &.selected{
+            background:#5C5C5C;
+            color:white;
+        }
     }
 }
 button{
@@ -33,15 +36,33 @@ button{
 
 
 export default function TagSection() {
+    const [tagList,setTagList] = useState<string[]>(['衣','食','住','行'])
+    const [selectedList,setSelectedList] = useState<string[]>([])
+    const addTag = ()=>{
+        const name = window.prompt('请输入新标签名')
+        if(name!==null){
+            setTagList([...tagList,name])
+        }
+    }
+    const selected = (tag:string)=>{
+        
+        if(selectedList.indexOf(tag)<0){
+            setSelectedList([...selectedList,tag])
+        }else{
+            setSelectedList(selectedList.filter(item=>item!==tag))
+        }
+    }
     return (
-        <SectionTag>
+        <SectionTag> 
             <ul>
-                <li>衣</li>
-                <li>食</li>
-                <li>住</li>
-                <li>行</li>
+                {tagList.map((item,index)=><li key={index}
+                onClick={()=>{
+                    selected(item)
+                }}
+                className={selectedList.indexOf(item)>=0?'selected':''}
+                >{item}</li>)}
             </ul>
-            <button>新建标签</button>
+            <button onClick={addTag}>新建标签</button>
         </SectionTag>
     )
 }
