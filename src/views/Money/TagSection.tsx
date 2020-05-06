@@ -1,6 +1,52 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+type tag = {
+    tags:string[]
+}
+type Props = {
+    value:string[],
+    changeValue:(state:tag)=>void
+}
+
+const TagSection:React.FC<Props> = (props) => {
+    const [tagList,setTagList] = useState<string[]>(['衣','食','住','行'])
+    // const [selectedList,setSelectedList] = useState<string[]>([])
+    const selectedList = props.value
+    const setSelectedList = props.changeValue
+    const addTag = ()=>{
+        const name = window.prompt('请输入新标签名')
+        if(name){
+            if(tagList.indexOf(name)>=0){
+                alert('标签名重复啊哥')
+            }else{
+                setTagList([...tagList,name])
+            }
+        }
+    }
+    const selected = (tag:string)=>{
+        if(selectedList.indexOf(tag)<0){
+            setSelectedList({tags:[...selectedList,tag]})
+        }else{
+            setSelectedList({tags:selectedList.filter(item=>item!==tag)})
+        }
+    }
+    return (
+        <SectionTag> 
+            <ul>
+                {tagList.map((item,index)=><li key={index}
+                onClick={()=>{
+                    selected(item)
+                }}
+                className={selectedList.indexOf(item)>=0?'selected':''}
+                >{item}</li>)}
+            </ul>
+            <button onClick={addTag}>新建标签</button>
+        </SectionTag>
+    )
+}
+
+
 const SectionTag = styled.section`
 /* border:1px solid red; */
 flex-grow:1;
@@ -33,36 +79,4 @@ button{
 }
 `;
 
-
-
-export default function TagSection() {
-    const [tagList,setTagList] = useState<string[]>(['衣','食','住','行'])
-    const [selectedList,setSelectedList] = useState<string[]>([])
-    const addTag = ()=>{
-        const name = window.prompt('请输入新标签名')
-        if(name!==null){
-            setTagList([...tagList,name])
-        }
-    }
-    const selected = (tag:string)=>{
-        
-        if(selectedList.indexOf(tag)<0){
-            setSelectedList([...selectedList,tag])
-        }else{
-            setSelectedList(selectedList.filter(item=>item!==tag))
-        }
-    }
-    return (
-        <SectionTag> 
-            <ul>
-                {tagList.map((item,index)=><li key={index}
-                onClick={()=>{
-                    selected(item)
-                }}
-                className={selectedList.indexOf(item)>=0?'selected':''}
-                >{item}</li>)}
-            </ul>
-            <button onClick={addTag}>新建标签</button>
-        </SectionTag>
-    )
-}
+export {TagSection}

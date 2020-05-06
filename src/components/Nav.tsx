@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import Icon from './Icon'
 const NavWraaper = styled.nav`
   line-height:24px;
@@ -17,15 +17,12 @@ const NavWraaper = styled.nav`
         align-items:center;
         justify-content:center;
         &.actived{
-          color:red;
-          fill:red;
+          color:indianred;
+          fill:indianred;
         }
         svg{
           width:24px;
           height:24px;
-        }
-        span{
-
         }
       }
     }
@@ -37,23 +34,23 @@ export default function Nav() {
         <NavWraaper>
         <ul>
           <li>
-            <Link to='/label'>
+            <NavLink activeClassName='actived' to='/label'>
               <Icon name='label'/>
               <span>标签</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to='/money'>
+            <NavLink activeClassName='actived' to='/money'>
             <Icon name='money'/>
               
               <span>记账</span>
-              </Link>
+              </NavLink>
           </li>
           <li>
-            <Link to='/statistics'>
+            <NavLink activeClassName='actived' to='/statistics'>
               <Icon name='statistics'/>
               <span>统计</span>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </NavWraaper>

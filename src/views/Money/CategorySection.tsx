@@ -2,6 +2,42 @@ import React from 'react'
 
 import styled from 'styled-components'
 
+const hashCategory = {'-':'支出','+':'收入'}
+//类型
+type categoryType = keyof typeof hashCategory
+
+type Props = {
+    value:categoryType,
+    changeValue:(category:{[propName:string]:categoryType})=>void;
+}
+
+const  CategorySection:React.FC<Props> = (props) => {
+    const category = props.value
+    const setCategory = props.changeValue
+    const changeCategory = (string:categoryType)=>{
+        setCategory({category:string})
+    }
+    return (
+        <SectionCategory>
+            <ul>
+                {(Object.keys(hashCategory) as categoryType[]).map(
+                    item=>
+                    <li key={item}
+                    className={category===item?'selected':''}
+                    onClick={()=>{
+                        changeCategory(item)
+                    }}>
+                        {item==='+'?'收入':'支出'}
+                    </li>)}
+            </ul>
+        </SectionCategory>
+    )
+}
+
+
+
+
+
 const SectionCategory = styled.section`
     ul{
         display:flex;
@@ -27,16 +63,4 @@ const SectionCategory = styled.section`
     }
 `;
 
-
-export default function CategorySection() {
-    return (
-        <SectionCategory>
-            <ul>
-                <li className="selected" onClick={()=>{
-                    console.log('xxx')
-                }}>支出</li>
-                <li>收入</li>
-            </ul>
-        </SectionCategory>
-    )
-}
+export {CategorySection}

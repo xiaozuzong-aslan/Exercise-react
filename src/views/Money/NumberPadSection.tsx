@@ -1,12 +1,24 @@
-import React,{useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {calculation} from './calculation'
 
-const NumberPadSection:React.FC = ()=>{
-    const [number,setNumber] = useState<string>('0')
+type Props = {
+    value:string,
+    changeValue:(amount:{[propName:string]:string})=>void;
+}
+
+
+const NumberPadSection:React.FC<Props> = (props)=>{
+    const number = props.value
+    const setNumber = props.changeValue
+    // const [number,setNumber] = useState<string>('0')
     const delegate = (e: React.MouseEvent<HTMLDivElement>) => {
         const input = (e.target as HTMLButtonElement).innerText
-        setNumber(calculation(input,number))
+        if(input==='ok'){
+            console.log('提交')
+        }else{
+            setNumber({amount:calculation(input,number)})
+        }
     }
     return (
         <SectionNumberPad>
