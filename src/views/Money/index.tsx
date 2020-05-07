@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {TagSection} from './TagSection'
 import {NoteSection} from './NoteSection'
 import {CategorySection} from './CategorySection'
@@ -18,8 +18,12 @@ export default function Money() {
             ...selectedInfos,
             ...options
         })
-       
     }
+    
+   
+    useEffect(()=>{
+        console.log('selectedInfos发生变化才执行')
+    },[selectedInfos])
     return (
         <>
             <TagSection value={selectedInfos.tags} changeValue={changeState}/>

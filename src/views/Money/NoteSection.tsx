@@ -37,6 +37,7 @@ const NoteSection:React.FC<Props> = (props) =>{
     const changeNote = () =>{   
         inputRef.current && changeValue({note:inputRef.current.value})
     }
+    
     return (
         <SectionNote>
             <label>

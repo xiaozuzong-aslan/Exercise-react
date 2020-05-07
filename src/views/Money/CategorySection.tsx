@@ -11,12 +11,13 @@ type Props = {
     changeValue:(category:{[propName:string]:categoryType})=>void;
 }
 
-const  CategorySection:React.FC<Props> = (props) => {
+const CategorySection = React.memo<Props>((props)=>{
     const category = props.value
     const setCategory = props.changeValue
     const changeCategory = (string:categoryType)=>{
         setCategory({category:string})
     }
+    console.log('type组件')
     return (
         <SectionCategory>
             <ul>
@@ -32,9 +33,7 @@ const  CategorySection:React.FC<Props> = (props) => {
             </ul>
         </SectionCategory>
     )
-}
-
-
+},(oldProps,newProps)=>oldProps.value===newProps.value)
 
 
 

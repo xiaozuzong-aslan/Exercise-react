@@ -20,6 +20,7 @@ const NumberPadSection:React.FC<Props> = (props)=>{
             setNumber({amount:calculation(input,number)})
         }
     }
+    
     return (
         <SectionNumberPad>
             <div className="output">{number}</div>
