@@ -1,23 +1,16 @@
-import React from 'react'
+import React, { useContext,memo} from 'react'
 
 import styled from 'styled-components'
+import { Context } from 'Context'
+
 
 const hashCategory = {'-':'支出','+':'收入'}
-//类型
 type categoryType = keyof typeof hashCategory
 
-type Props = {
-    value:categoryType,
-    changeValue:(category:{[propName:string]:categoryType})=>void;
-}
-
-const CategorySection = React.memo<Props>((props)=>{
-    const category = props.value
-    const setCategory = props.changeValue
-    const changeCategory = (string:categoryType)=>{
-        setCategory({category:string})
-    }
-    console.log('type组件')
+const CategorySection:React.FC = memo(() =>{
+    const {state,dispatch} = useContext(Context)!
+    const category = state.CurrentTagInfo.category
+    
     return (
         <SectionCategory>
             <ul>
@@ -26,15 +19,14 @@ const CategorySection = React.memo<Props>((props)=>{
                     <li key={item}
                     className={category===item?'selected':''}
                     onClick={()=>{
-                        changeCategory(item)
+                        dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,category:item}})
                     }}>
                         {item==='+'?'收入':'支出'}
                     </li>)}
             </ul>
         </SectionCategory>
     )
-},(oldProps,newProps)=>oldProps.value===newProps.value)
-
+}) 
 
 
 const SectionCategory = styled.section`
@@ -63,3 +55,36 @@ const SectionCategory = styled.section`
 `;
 
 export {CategorySection}
+
+// const hashCategory = {'-':'支出','+':'收入'}
+// //类型
+// type categoryType = keyof typeof hashCategory
+
+// type Props = {
+//     value:categoryType,
+//     changeValue:(category:{[propName:string]:categoryType})=>void;
+// }
+
+// const CategorySection = React.memo<Props>((props)=>{
+//     const category = props.value
+//     const setCategory = props.changeValue
+//     const changeCategory = (string:categoryType)=>{
+//         setCategory({category:string})
+//     }
+//     console.log('type组件')
+//     return (
+//         <SectionCategory>
+//             <ul>
+//                 {(Object.keys(hashCategory) as categoryType[]).map(
+//                     item=>
+//                     <li key={item}
+//                     className={category===item?'selected':''}
+//                     onClick={()=>{
+//                         changeCategory(item)
+//                     }}>
+//                         {item==='+'?'收入':'支出'}
+//                     </li>)}
+//             </ul>
+//         </SectionCategory>
+//     )
+// },(oldProps,newProps)=>oldProps.value===newProps.value)

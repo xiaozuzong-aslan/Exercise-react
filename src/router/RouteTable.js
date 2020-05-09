@@ -1,5 +1,5 @@
 import React from 'react'
-import {Money,Label,Statistics} from 'views'
+import {Money,Detail,Statistics,Edit} from 'views'
 import {
     Switch,
     Route,
@@ -14,11 +14,15 @@ export default function RouteTable() {
         <Route exact path='/money'>
           <Money />
         </Route>
-        <Route exact path='/label'>
-          <Label />
-        </Route>
+      
         <Route exact path='/statistics'>
           <Statistics />
+        </Route>
+        <Route exact path='/detail'>
+          <Detail />
+        </Route>
+        <Route exact path='/detail/edit/:id'>
+          <Edit />
         </Route>
         <Route path='*'>
           <div>404</div>

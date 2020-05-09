@@ -1,26 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import {calculation} from './calculation'
-
-type Props = {
-    value:string,
-    changeValue:(amount:{[propName:string]:string})=>void;
-}
+import {Context} from 'Context'
 
 
-const NumberPadSection:React.FC<Props> = (props)=>{
-    const number = props.value
-    const setNumber = props.changeValue
-    // const [number,setNumber] = useState<string>('0')
+const NumberPadSection:React.FC = () => {
+    const {state,dispatch} = useContext(Context)!
+    const number = state.CurrentTagInfo.amount
     const delegate = (e: React.MouseEvent<HTMLDivElement>) => {
         const input = (e.target as HTMLButtonElement).innerText
         if(input==='ok'){
-            console.log('提交')
+            console.log(state.CurrentTagInfo)
         }else{
-            setNumber({amount:calculation(input,number)})
+            dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,amount:calculation(input,number)}})
         }
     }
-    
+
     return (
         <SectionNumberPad>
             <div className="output">{number}</div>
@@ -45,6 +40,11 @@ const NumberPadSection:React.FC<Props> = (props)=>{
         </SectionNumberPad>
     )
 }
+
+
+
+
+
 
 const SectionNumberPad = styled.section`
     display:flex;

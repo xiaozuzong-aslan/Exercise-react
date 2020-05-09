@@ -64,3 +64,15 @@ declare module '*.module.sass' {
   const classes: { readonly [key: string]: string };
   export default classes;
 }
+
+
+type ActionType = 'tagList' | 'CurrentTagInfo' 
+type CurrentTagInfo = {id?:number,tag:string[],category:'+'|'-',amount:string,note:string,createAt?:Date}
+type Action = {
+  type:ActionType,
+  payload:string[] | CurrentTagInfo
+}
+type State = {
+  tagList:string[],
+  CurrentTagInfo:CurrentTagInfo
+}

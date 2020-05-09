@@ -1,40 +1,36 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 
-type tag = {
-    tags:string[]
-}
-type Props = {
-    value:string[],
-    changeValue:(state:tag)=>void
-}
+// import createId from 'helpers/createId'
+import {Context} from 'Context'
 
-const TagSection:React.FC<Props> = (props) => {
-    const [tagList,setTagList] = useState<string[]>(['衣','食','住','行'])
-    // const [selectedList,setSelectedList] = useState<string[]>([])
-    const selectedList = props.value
-    const setSelectedList = props.changeValue
+
+const TagSection:React.FC = () => {
+    const {state,dispatch} = useContext(Context)!
+    
+    const selectedList = state.CurrentTagInfo.tag
+   
     const addTag = ()=>{
         const name = window.prompt('请输入新标签名')
         if(name){
-            if(tagList.indexOf(name)>=0){
+            if(state.tagList.indexOf(name)>=0){
                 alert('标签名重复啊哥')
             }else{
-                setTagList([...tagList,name])
+                dispatch({type:'tagList',payload:[name]})
             }
         }
     }
     const selected = (tag:string)=>{
         if(selectedList.indexOf(tag)<0){
-            setSelectedList({tags:[...selectedList,tag]})
+            dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,tag:[tag]}})
         }else{
-            setSelectedList({tags:selectedList.filter(item=>item!==tag)})
+            dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,tag:[]}})
         }
     }
     return (
         <SectionTag> 
             <ul>
-                {tagList.map((item,index)=><li key={index}
+                {state.tagList.map((item)=><li key={item}
                 onClick={()=>{
                     selected(item)
                 }}

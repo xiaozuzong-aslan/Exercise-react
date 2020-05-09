@@ -34,9 +34,9 @@ export default function Nav() {
         <NavWraaper>
         <ul>
           <li>
-            <NavLink activeClassName='actived' to='/label'>
+            <NavLink activeClassName='actived' to='/detail'>
               <Icon name='label'/>
-              <span>标签</span>
+              <span>明细</span>
             </NavLink>
           </li>
           <li>
@@ -49,7 +49,7 @@ export default function Nav() {
           <li>
             <NavLink activeClassName='actived' to='/statistics'>
               <Icon name='statistics'/>
-              <span>统计</span>
+              <span>图表</span>
             </NavLink>
           </li>
         </ul>
