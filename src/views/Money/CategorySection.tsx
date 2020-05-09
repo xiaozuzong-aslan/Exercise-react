@@ -9,7 +9,7 @@ type categoryType = keyof typeof hashCategory
 
 const CategorySection:React.FC = memo(() =>{
     const {state,dispatch} = useContext(Context)!
-    const category = state.CurrentTagInfo.category
+    const category = state.currentTagInfo.category
     
     return (
         <SectionCategory>
@@ -19,7 +19,7 @@ const CategorySection:React.FC = memo(() =>{
                     <li key={item}
                     className={category===item?'selected':''}
                     onClick={()=>{
-                        dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,category:item}})
+                        dispatch({type:'CurrentTagInfo',payload:{...state.currentTagInfo,category:item}})
                     }}>
                         {item==='+'?'收入':'支出'}
                     </li>)}

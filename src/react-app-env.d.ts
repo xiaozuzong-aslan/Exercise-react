@@ -66,13 +66,14 @@ declare module '*.module.sass' {
 }
 
 
-type ActionType = 'tagList' | 'CurrentTagInfo' 
+type ActionType = 'TagList' | 'CurrentTagInfo' | 'DataSource'
 type CurrentTagInfo = {id?:number,tag:string[],category:'+'|'-',amount:string,note:string,createAt?:Date}
 type Action = {
   type:ActionType,
-  payload:string[] | CurrentTagInfo
+  payload:string[] | CurrentTagInfo | CurrentTagInfo[]
 }
 type State = {
   tagList:string[],
-  CurrentTagInfo:CurrentTagInfo
-}
+  currentTagInfo:CurrentTagInfo,
+  dataSource:CurrentTagInfo[]
+} 

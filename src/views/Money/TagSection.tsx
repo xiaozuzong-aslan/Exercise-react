@@ -8,7 +8,7 @@ import {Context} from 'Context'
 const TagSection:React.FC = () => {
     const {state,dispatch} = useContext(Context)!
     
-    const selectedList = state.CurrentTagInfo.tag
+    const selectedList = state.currentTagInfo.tag
    
     const addTag = ()=>{
         const name = window.prompt('请输入新标签名')
@@ -16,15 +16,15 @@ const TagSection:React.FC = () => {
             if(state.tagList.indexOf(name)>=0){
                 alert('标签名重复啊哥')
             }else{
-                dispatch({type:'tagList',payload:[name]})
+                dispatch({type:'TagList',payload:[name]})
             }
         }
     }
     const selected = (tag:string)=>{
         if(selectedList.indexOf(tag)<0){
-            dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,tag:[tag]}})
+            dispatch({type:'CurrentTagInfo',payload:{...state.currentTagInfo,tag:[tag]}})
         }else{
-            dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,tag:[]}})
+            dispatch({type:'CurrentTagInfo',payload:{...state.currentTagInfo,tag:[]}})
         }
     }
     return (

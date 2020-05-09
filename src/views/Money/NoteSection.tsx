@@ -6,10 +6,10 @@ import {Context} from 'Context'
 
 const NoteSection:React.FC = () =>{
     const {state,dispatch} = useContext(Context)!
-    const value = state.CurrentTagInfo.note
+    const value = state.currentTagInfo.note
     const inputRef = useRef<HTMLInputElement>(null)
     const changeNote = () =>{   
-        inputRef.current && dispatch({type:'CurrentTagInfo',payload:{...state.CurrentTagInfo,note:inputRef.current.value}})
+        inputRef.current && dispatch({type:'CurrentTagInfo',payload:{...state.currentTagInfo,note:inputRef.current.value}})
     }
     return (
         <SectionNote>
