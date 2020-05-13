@@ -11,12 +11,12 @@ const NumberPadSection:React.FC = () => {
         const input = (e.target as HTMLButtonElement).innerText
         if(input==='ok'){
             const {tag,note,amount} = state.currentTagInfo
-            if(note){
+            if(note.length>=1){
                 if(tag.length>=1){
                     if(amount!=='0'){
                         alert('真棒，记账成功')
                         dispatch({type:'DataSource',payload:[{...state.currentTagInfo,id:createId(),createAt: new Date()}]})
-                        console.log(state.dataSource)
+                        dispatch({type:'CurrentTagInfo',payload:{note:'',amount:'0',category:'-',tag:[]}})
                     }else{
                         alert('...e,数字为0，还有记账的必要吗?')
                     }
